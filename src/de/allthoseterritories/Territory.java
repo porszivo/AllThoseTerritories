@@ -61,12 +61,18 @@ public class Territory {
 		return capital[1];
 	}
 
-	public void addNeighbour(Territory ter) {
-		neighbours.add(ter);
+	public void setNeighbours(ArrayList<Territory> neighbours) {
+		this.neighbours = neighbours;
 	}
 
+	public ArrayList<Territory> getNeighbours(){
+		return neighbours;
+	}
+	
 	public String getArmyValue() {
 		return Integer.toString(armyValue);
 	}
+	
+
 
 }
