@@ -34,9 +34,10 @@ public class GameBoard extends JComponent {
 		super.paintComponent(g);
 
 		for (Territory element : list) {
-			g.setColor(Color.red);
+			g.setColor(Color.blue);
 			for (Territory neighbour : element.getNeighbours()) {
-				//Entfernung der Beiden Punkte kleiner bei Verbindung auﬂerhalb der Karte
+				// Entfernung der Beiden Punkte kleiner bei Verbindung auﬂerhalb
+				// der Karte
 				if (overEdge(neighbour.getCapitalX(), element.getCapitalX())) {
 					if (element.getCapitalX() > neighbour.getCapitalX()) {
 						g.drawLine(neighbour.getCapitalX() + 1250, neighbour.getCapitalY(), element.getCapitalX(),
@@ -55,17 +56,20 @@ public class GameBoard extends JComponent {
 					g.drawLine(neighbour.getCapitalX(), neighbour.getCapitalY(), element.getCapitalX(),
 							element.getCapitalY());
 				}
-				//Ende Verbindung auﬂerhalb der Karte
+				// Ende Verbindung auﬂerhalb der Karte
 			}
+
+		}
+
+		for (Territory element : list) {
 			g.setColor(Color.gray);
 			for (int i = 0; i < element.getPolyXCoords().size(); i++) {
 				g.fillPolygon(element.getPolyXCoords().get(i), element.getPolyYCoords().get(i),
 						element.getPolyXCoords().get(i).length);
 			}
 
-			g.setColor(Color.green);
+			g.setColor(Color.black);
 			g.drawString(element.getArmyValue(), element.getCapitalX(), element.getCapitalY());
-
 		}
 
 	}
