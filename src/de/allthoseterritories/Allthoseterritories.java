@@ -20,17 +20,15 @@ import javax.swing.JPanel;
 public class Allthoseterritories extends JPanel {
 
 	private ArrayList<Territory> list;
-	
+
 	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		frame.getContentPane().add(new GameBoard(args[0]));
+
+		JFrame frame = new JFrame("All Those Territories");
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setContentPane(new GameBoard(args[0]));
 		frame.setSize(1250, 650);
 		frame.setVisible(true);
-
-		
-
 	}
 
 }

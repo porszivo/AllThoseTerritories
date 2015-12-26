@@ -1,9 +1,9 @@
 package de.allthoseterritories;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,18 +15,27 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.JComponent;
 
-public class GameBoard extends JComponent {
+import javax.swing.JPanel;
+
+public class GameBoard extends JPanel {
 	public ArrayList<Territory> list;
 	public String initMap;
 	public ArrayList<Continent> continentList;
-
+	Color co = new Color(0, 0, 0);
+	
+	
 	public GameBoard(String initMap) {
+
 		this.initMap = initMap;
 		list = new ArrayList<Territory>();
 		continentList = new ArrayList<Continent>();
 		parseFile();
+		
+		for (Territory element : list) {
+			this.add(element);
+		}
+		System.out.println(this.getComponentCount());
 
 	}
 
@@ -34,7 +43,7 @@ public class GameBoard extends JComponent {
 		super.paintComponent(g);
 
 		for (Territory element : list) {
-			g.setColor(Color.blue);
+			g.setColor(Color.orange);
 			for (Territory neighbour : element.getNeighbours()) {
 				// Entfernung der Beiden Punkte kleiner bei Verbindung auﬂerhalb
 				// der Karte
@@ -59,17 +68,6 @@ public class GameBoard extends JComponent {
 				// Ende Verbindung auﬂerhalb der Karte
 			}
 
-		}
-
-		for (Territory element : list) {
-			g.setColor(Color.gray);
-			for (int i = 0; i < element.getPolyXCoords().size(); i++) {
-				g.fillPolygon(element.getPolyXCoords().get(i), element.getPolyYCoords().get(i),
-						element.getPolyXCoords().get(i).length);
-			}
-
-			g.setColor(Color.black);
-			g.drawString(element.getArmyValue(), element.getCapitalX(), element.getCapitalY());
 		}
 
 	}
