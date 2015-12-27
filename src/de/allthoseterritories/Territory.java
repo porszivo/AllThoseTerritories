@@ -18,11 +18,11 @@ public class Territory extends JComponent {
 	public Territory(String name, int[] coords) {
 		this.name = name;
 		this.owner = null;
-		this.polyXCoords = new ArrayList<int[]>();
-		this.polyYCoords = new ArrayList<int[]>();
+		this.polyXCoords = new ArrayList<>();
+		this.polyYCoords = new ArrayList<>();
 		addPatch(coords);
 		this.armyValue = 0;
-		this.neighbours = new ArrayList<Territory>();
+		this.neighbours = new ArrayList<>();
 	}
 
 	public void setCapital(int[] coords) {
@@ -80,23 +80,25 @@ public class Territory extends JComponent {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(Color.blue);
+		g.setColor(Color.BLUE);
 		if (owner == null)
-			g.setColor(Color.blue);
+			g.setColor(Color.GRAY);
 		else if (owner.equals("CPU"))
-			g.setColor(Color.red);
+			g.setColor(Color.RED);
 		else if (owner.equals("HUMAN"))
-			g.setColor(Color.blue);
+			g.setColor(Color.BLUE);
 
 		for (int i = 0; i < polyXCoords.size(); i++) {
 			g.fillPolygon(polyXCoords.get(i), polyYCoords.get(i),
 					polyXCoords.get(i).length);
 		}
 
-		g.setColor(Color.black);
-		g.drawString(Integer.toString(armyValue), capital[0], capital[1]);
+		g.setColor(Color.BLACK);
+		for (int i = 0; i < polyXCoords.size(); i++) {
+			g.drawPolygon(polyXCoords.get(i), polyYCoords.get(i), polyXCoords.get(i).length);
+		}
 
-	 //Silly comment
+		g.drawString(Integer.toString(armyValue), capital[0], capital[1]);
 
 	}
 	

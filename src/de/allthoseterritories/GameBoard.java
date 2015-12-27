@@ -28,16 +28,12 @@ public class GameBoard extends JPanel {
 	public GameBoard(String initMap) {
 
 		this.initMap = initMap;
-		list = new ArrayList<Territory>();
-		continentList = new ArrayList<Continent>();
+		list = new ArrayList<>();
+		continentList = new ArrayList<>();
 		parseFile();
-		JButton button = new JButton("test");
-		
-		
 		
 		for (Territory element : list) {
 			this.add(element);
-			this.add(new JButton("test"));
 			
 		}
 		System.out.println(this.getComponentCount());
@@ -48,9 +44,10 @@ public class GameBoard extends JPanel {
 		super.paintComponent(g);
 
 		for (Territory element : list) {
+			element.paintComponent(g);
 			g.setColor(Color.orange);
 			for (Territory neighbour : element.getNeighbours()) {
-				// Entfernung der beiden Punkte kleiner bei Verbindung außerhalb
+				// Entfernung der beiden Punkte kleiner bei Verbindung auï¿½erhalb
 				// der Karte
 				if (overEdge(neighbour.getCapitalX(), element.getCapitalX())) {
 					if (element.getCapitalX() > neighbour.getCapitalX()) {
@@ -70,7 +67,7 @@ public class GameBoard extends JPanel {
 					g.drawLine(neighbour.getCapitalX(), neighbour.getCapitalY(), element.getCapitalX(),
 							element.getCapitalY());
 				}
-				// Ende Verbindung außerhalb der Karte
+				// Ende Verbindung auï¿½erhalb der Karte
 			}
 			
 
@@ -141,7 +138,7 @@ public class GameBoard extends JPanel {
 					String[] split = line.split(" : ");
 					String name = split[0];
 					List<String> neighbours = Arrays.asList(split[1].split(" - "));
-					ArrayList<Territory> tempNeighbour = new ArrayList<Territory>();
+					ArrayList<Territory> tempNeighbour = new ArrayList<>();
 					Territory owner = null;
 					for (Territory element : list) {
 						if (element.getName().equals(name))
