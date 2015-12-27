@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class GameBoard extends JPanel {
@@ -31,9 +31,14 @@ public class GameBoard extends JPanel {
 		list = new ArrayList<Territory>();
 		continentList = new ArrayList<Continent>();
 		parseFile();
+		JButton button = new JButton("test");
+		
+		
 		
 		for (Territory element : list) {
 			this.add(element);
+			this.add(new JButton("test"));
+			
 		}
 		System.out.println(this.getComponentCount());
 
@@ -45,7 +50,7 @@ public class GameBoard extends JPanel {
 		for (Territory element : list) {
 			g.setColor(Color.orange);
 			for (Territory neighbour : element.getNeighbours()) {
-				// Entfernung der Beiden Punkte kleiner bei Verbindung auﬂerhalb
+				// Entfernung der beiden Punkte kleiner bei Verbindung auﬂerhalb
 				// der Karte
 				if (overEdge(neighbour.getCapitalX(), element.getCapitalX())) {
 					if (element.getCapitalX() > neighbour.getCapitalX()) {
@@ -67,6 +72,7 @@ public class GameBoard extends JPanel {
 				}
 				// Ende Verbindung auﬂerhalb der Karte
 			}
+			
 
 		}
 

@@ -98,6 +98,11 @@ public class Territory extends JComponent {
 
 	
 
-}
+	}
+	
+	@Override
+	public String toString() {
+		return name;
+	}
 
 }
