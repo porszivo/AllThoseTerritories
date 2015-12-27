@@ -96,7 +96,7 @@ public class Territory extends JComponent {
 		g.setColor(Color.black);
 		g.drawString(Integer.toString(armyValue), capital[0], capital[1]);
 
-	
+	 //Silly comment
 
 	}
 	
