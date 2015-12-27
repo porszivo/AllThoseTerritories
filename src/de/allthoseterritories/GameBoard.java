@@ -23,18 +23,17 @@ public class GameBoard extends JPanel {
 	public String initMap;
 	public ArrayList<Continent> continentList;
 	Color co = new Color(0, 0, 0);
-	
-	
+
 	public GameBoard(String initMap) {
 
 		this.initMap = initMap;
 		list = new ArrayList<>();
 		continentList = new ArrayList<>();
 		parseFile();
-		
+
 		for (Territory element : list) {
 			this.add(element);
-			
+
 		}
 		System.out.println(this.getComponentCount());
 
@@ -44,10 +43,11 @@ public class GameBoard extends JPanel {
 		super.paintComponent(g);
 
 		for (Territory element : list) {
-			element.paintComponent(g);
+
 			g.setColor(Color.orange);
 			for (Territory neighbour : element.getNeighbours()) {
-				// Entfernung der beiden Punkte kleiner bei Verbindung au�erhalb
+				// Entfernung der beiden Punkte kleiner bei Verbindung
+				// au�erhalb
 				// der Karte
 				if (overEdge(neighbour.getCapitalX(), element.getCapitalX())) {
 					if (element.getCapitalX() > neighbour.getCapitalX()) {
@@ -69,9 +69,10 @@ public class GameBoard extends JPanel {
 				}
 				// Ende Verbindung au�erhalb der Karte
 			}
-			
 
 		}
+		for (Territory element : list)
+			element.paintComponent(g);
 
 	}
 
