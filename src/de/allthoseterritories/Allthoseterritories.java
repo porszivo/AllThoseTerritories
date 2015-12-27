@@ -17,6 +17,8 @@ import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+// Main Class
+
 public class Allthoseterritories extends JPanel {
 
 	private ArrayList<Territory> list;

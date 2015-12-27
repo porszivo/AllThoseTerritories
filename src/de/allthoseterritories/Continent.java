@@ -1,5 +1,7 @@
 package de.allthoseterritories;
 
+// Class done
+
 import java.util.ArrayList;
 
 public class Continent {
@@ -13,7 +15,7 @@ public class Continent {
 		this.bonus = bonus;
 		list = new ArrayList<Territory>();
 	}
-	
+
 	public void addTerritory(Territory ter){
 		list.add(ter);
 	}
