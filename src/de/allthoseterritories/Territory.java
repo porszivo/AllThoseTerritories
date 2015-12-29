@@ -16,6 +16,7 @@ public class Territory extends JComponent {
 	private ArrayList<int[]> polyYCoords;
 
 	public Territory(String name, int[] coords) {
+		super();
 		this.name = name;
 		this.owner = null;
 		this.polyXCoords = new ArrayList<>();
@@ -101,10 +102,12 @@ public class Territory extends JComponent {
 		g.drawString(Integer.toString(armyValue), capital[0], capital[1]);
 
 	}
-	
-	@Override
-	public String toString() {
-		return name;
+
+	public void changeOwner(String ow) {
+		if(this.getOwner()==null) {
+            this.owner=ow;
+            this.repaint();
+        }
 	}
 
 }
