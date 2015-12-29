@@ -1,7 +1,6 @@
 package de.allthoseterritories;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -15,14 +14,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class GameBoard extends JPanel {
 	public ArrayList<Territory> list;
 	public String initMap;
 	public ArrayList<Continent> continentList;
-	Color co = new Color(0, 0, 0);
 
 	public GameBoard(String initMap) {
 
@@ -33,7 +30,6 @@ public class GameBoard extends JPanel {
 
 		for (Territory element : list) {
 			this.add(element);
-
 		}
 		System.out.println(this.getComponentCount());
 
