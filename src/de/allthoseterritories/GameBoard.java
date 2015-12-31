@@ -2,6 +2,8 @@ package de.allthoseterritories;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,13 +18,14 @@ import java.util.regex.Pattern;
 
 import javax.swing.JPanel;
 
-public class GameBoard extends JPanel {
+public class GameBoard extends JPanel implements MouseListener {
 	public ArrayList<Territory> list;
 	public String initMap;
 	public ArrayList<Continent> continentList;
 
 	public GameBoard(String initMap) {
 
+		this.addMouseListener(this);
 		this.initMap = initMap;
 		list = new ArrayList<>();
 		continentList = new ArrayList<>();
@@ -42,9 +45,6 @@ public class GameBoard extends JPanel {
 
 			g.setColor(Color.orange);
 			for (Territory neighbour : element.getNeighbours()) {
-				// Entfernung der beiden Punkte kleiner bei Verbindung
-				// au�erhalb
-				// der Karte
 				if (overEdge(neighbour.getCapitalX(), element.getCapitalX())) {
 					if (element.getCapitalX() > neighbour.getCapitalX()) {
 						g.drawLine(neighbour.getCapitalX() + 1250, neighbour.getCapitalY(), element.getCapitalX(),
@@ -63,7 +63,6 @@ public class GameBoard extends JPanel {
 					g.drawLine(neighbour.getCapitalX(), neighbour.getCapitalY(), element.getCapitalX(),
 							element.getCapitalY());
 				}
-				// Ende Verbindung au�erhalb der Karte
 			}
 
 		}
@@ -177,9 +176,7 @@ public class GameBoard extends JPanel {
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (
-
-		IOException e)
+		} catch (IOException e)
 
 		{
 			// TODO Auto-generated catch block
@@ -200,4 +197,31 @@ public class GameBoard extends JPanel {
 			return false;
 	}
 
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		System.out.println(e.getX() + ":" + e.getY());
+		for(Territory elem : list) {
+			if(elem.contains(e.getX(), e.getY())) System.out.println(elem.getName());
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
+	}
 }
