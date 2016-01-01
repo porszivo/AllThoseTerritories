@@ -2,6 +2,8 @@ package de.allthoseterritories;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Polygon;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -27,11 +29,19 @@ public class Territory extends JComponent implements MouseListener{
 		this.armyValue = 0;
 		this.neighbours = new ArrayList<>();
 		this.addMouseListener(this);
+		Polygon test = new Polygon();
+		
+		for (int i = 0; i < polyXCoords.size(); i++) {
+			for (int j=0; j < polyXCoords.get(i).length; j++)
+			test.addPoint(polyXCoords.get(i)[j],polyYCoords.get(i)[j] );
+		}
+		this.setBounds(test.getBounds()); //This is where the Magic happens, hier wird der bereich festgelegt, der Clickbar ist
+
+
 	}
 
 	public void setCapital(int[] coords) {
-		this.capital = coords;
-		this.setBounds(capital[0]-40, capital[1]-40, 80, 80); //This is where the Magic happens, hier wird der bereich festgelegt, der Clickbar ist
+		this.capital = coords; 
 	}
 
 	public String getName() {
