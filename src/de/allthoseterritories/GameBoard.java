@@ -18,14 +18,14 @@ import java.util.regex.Pattern;
 
 import javax.swing.JPanel;
 
-public class GameBoard extends JPanel implements MouseListener {
+public class GameBoard extends JPanel{
 	public ArrayList<Territory> list;
 	public String initMap;
 	public ArrayList<Continent> continentList;
 
 	public GameBoard(String initMap) {
 
-		this.addMouseListener(this);
+		
 		this.initMap = initMap;
 		list = new ArrayList<>();
 		continentList = new ArrayList<>();
@@ -33,8 +33,10 @@ public class GameBoard extends JPanel implements MouseListener {
 
 		for (Territory element : list) {
 			this.add(element);
+			//this.addMouseListener((MouseListener) element);
 		}
 		System.out.println(this.getComponentCount());
+		this.setLayout(null);
 
 	}
 
@@ -197,31 +199,4 @@ public class GameBoard extends JPanel implements MouseListener {
 			return false;
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		System.out.println(e.getX() + ":" + e.getY());
-		for(Territory elem : list) {
-			if(elem.contains(e.getX(), e.getY())) System.out.println(elem.getName());
-		}
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-
-	}
 }

@@ -2,11 +2,13 @@ package de.allthoseterritories;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JComponent;
 
-public class Territory extends JComponent {
+public class Territory extends JComponent implements MouseListener{
 	private String name;
 	private ArrayList<Territory> neighbours;
 	private int[] capital;
@@ -24,10 +26,12 @@ public class Territory extends JComponent {
 		addPatch(coords);
 		this.armyValue = 0;
 		this.neighbours = new ArrayList<>();
+		this.addMouseListener(this);
 	}
 
 	public void setCapital(int[] coords) {
 		this.capital = coords;
+		this.setBounds(capital[0]-40, capital[1]-40, 80, 80); //This is where the Magic happens, hier wird der bereich festgelegt, der Clickbar ist
 	}
 
 	public String getName() {
@@ -108,6 +112,35 @@ public class Territory extends JComponent {
             this.owner=ow;
             this.repaint();
         }
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		System.out.println("Clicked!!!!" + name);
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
