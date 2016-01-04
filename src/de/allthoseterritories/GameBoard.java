@@ -2,6 +2,7 @@ package de.allthoseterritories;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.BufferedReader;
@@ -30,8 +31,11 @@ public class GameBoard extends JPanel{
 		list = new ArrayList<>();
 		continentList = new ArrayList<>();
 		parseFile();
+		
+		MouseAdapter myMA = new MouseAdapterMod();
 
 		for (Territory element : list) {
+			element.addMouseListener(myMA);
 			this.add(element);
 			//this.addMouseListener((MouseListener) element);
 		}
@@ -200,3 +204,12 @@ public class GameBoard extends JPanel{
 	}
 
 }
+
+class MouseAdapterMod extends MouseAdapter {
+
+	   // usually better off with mousePressed rather than clicked
+	   public void mouseClicked(MouseEvent e) {
+	       Territory btnPanel = (Territory)e.getSource();
+	       System.out.println(btnPanel.getName());
+	   }
+	}

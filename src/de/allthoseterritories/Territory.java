@@ -10,12 +10,13 @@ import java.util.ArrayList;
 
 import javax.swing.JComponent;
 
-public class Territory extends JComponent implements MouseListener{
+public class Territory extends JComponent {
 	private String name;
 	private ArrayList<Territory> neighbours;
 	private int[] capital;
 	private int armyValue;
 	private String owner;
+	private Polygon polygon = new Polygon();
 	private ArrayList<int[]> polyXCoords;
 	private ArrayList<int[]> polyYCoords;
 
@@ -28,26 +29,24 @@ public class Territory extends JComponent implements MouseListener{
 		addPatch(coords);
 		this.armyValue = 0;
 		this.neighbours = new ArrayList<>();
-		this.addMouseListener(this);
-		Polygon test = new Polygon();
-		
-		for (int i = 0; i < polyXCoords.size(); i++) {
-			for (int j=0; j < polyXCoords.get(i).length; j++)
-			test.addPoint(polyXCoords.get(i)[j],polyYCoords.get(i)[j] );
-		}
-		this.setBounds(test.getBounds()); //This is where the Magic happens, hier wird der bereich festgelegt, der Clickbar ist
 
+		for (int i = 0; i < polyXCoords.size(); i++) {
+			for (int j = 0; j < polyXCoords.get(i).length; j++)
+				polygon.addPoint(polyXCoords.get(i)[j], polyYCoords.get(i)[j]);
+		}
+		this.setBounds(polygon.getBounds()); // This is where the Magic happens,
+												// hier wird der bereich
+												// festgelegt, der Clickbar ist
 
 	}
 
 	public void setCapital(int[] coords) {
-		this.capital = coords; 
+		this.capital = coords;
 	}
 
 	public String getName() {
 		return name;
 	}
-
 
 	public void addPatch(int[] patch) {
 		int[] polyXCoordsSingle = new int[patch.length / 2];
@@ -103,54 +102,23 @@ public class Territory extends JComponent implements MouseListener{
 		else if (owner.equals("HUMAN"))
 			g.setColor(Color.BLUE);
 
-		for (int i = 0; i < polyXCoords.size(); i++) {
-			g.fillPolygon(polyXCoords.get(i), polyYCoords.get(i),
-					polyXCoords.get(i).length);
-		}
+		g.fillPolygon(polygon);
 
 		g.setColor(Color.BLACK);
-		for (int i = 0; i < polyXCoords.size(); i++) {
-			g.drawPolygon(polyXCoords.get(i), polyYCoords.get(i), polyXCoords.get(i).length);
-		}
+		g.drawPolygon(polygon);
+		Rectangle test = polygon.getBounds();
+		g.setColor(Color.RED);
+		g.drawRect(test.x,test.y,test.width,test.height);
 
 		g.drawString(Integer.toString(armyValue), capital[0], capital[1]);
 
 	}
 
 	public void changeOwner(String ow) {
-		if(this.getOwner()==null) {
-            this.owner=ow;
-            this.repaint();
-        }
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		System.out.println("Clicked!!!!" + name);
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		if (this.getOwner() == null) {
+			this.owner = ow;
+			this.repaint();
+		}
 	}
 
 }
