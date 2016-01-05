@@ -16,7 +16,6 @@ public class Territory extends JComponent {
 	private int[] capital;
 	private int armyValue;
 	private String owner;
-	private Polygon polygon = new Polygon();
 	private ArrayList<Polygon> polylist = new ArrayList<Polygon>();
 	private ArrayList<int[]> polyXCoords;
 	private ArrayList<int[]> polyYCoords;
@@ -31,20 +30,11 @@ public class Territory extends JComponent {
 		this.armyValue = 0;
 		this.neighbours = new ArrayList<>();
 
-		for (int i = 0; i < polyXCoords.size(); i++) {
-			Polygon polytemp = new Polygon();
-			for (int j = 0; j < polyXCoords.get(i).length; j++) {
-				polytemp.addPoint(polyXCoords.get(i)[j], polyYCoords.get(i)[j]);
-			}
-			polylist.add(polytemp);
-
-		}
-
 	}
 
 	public void setCapital(int[] coords) {
 		this.capital = coords;
-		this.setBounds(capital[0]-5,capital[1]-15, 15, 20);
+		this.setBounds(capital[0] - 7, capital[1] - 15, 20, 20);
 	}
 
 	public String getName() {
@@ -65,6 +55,12 @@ public class Territory extends JComponent {
 		}
 		polyXCoords.add(polyXCoordsSingle);
 		polyYCoords.add(polyYCoordsSingle);
+		Polygon polytemp = new Polygon();
+		for (int i = 0; i < polyXCoordsSingle.length; i++) {
+			polytemp.addPoint(polyXCoordsSingle[i], polyYCoordsSingle[i]);
+		}
+		polylist.add(polytemp);
+
 	}
 
 	public ArrayList<int[]> getPolyYCoords() {
@@ -105,8 +101,8 @@ public class Territory extends JComponent {
 		}
 
 		g.setColor(Color.RED);
-		g.drawRect(capital[0]-5,capital[1]-15, 15, 20);
-		
+		g.drawRect(capital[0] - 7, capital[1] - 15, 20, 20);
+
 		g.drawString(Integer.toString(armyValue), capital[0], capital[1]);
 
 	}
