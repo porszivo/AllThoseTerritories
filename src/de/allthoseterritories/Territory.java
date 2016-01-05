@@ -17,6 +17,7 @@ public class Territory extends JComponent {
 	private int armyValue;
 	private String owner;
 	private Polygon polygon = new Polygon();
+	private ArrayList<Polygon> polylist = new ArrayList<Polygon>();
 	private ArrayList<int[]> polyXCoords;
 	private ArrayList<int[]> polyYCoords;
 
@@ -31,17 +32,19 @@ public class Territory extends JComponent {
 		this.neighbours = new ArrayList<>();
 
 		for (int i = 0; i < polyXCoords.size(); i++) {
-			for (int j = 0; j < polyXCoords.get(i).length; j++)
-				polygon.addPoint(polyXCoords.get(i)[j], polyYCoords.get(i)[j]);
+			Polygon polytemp = new Polygon();
+			for (int j = 0; j < polyXCoords.get(i).length; j++) {
+				polytemp.addPoint(polyXCoords.get(i)[j], polyYCoords.get(i)[j]);
+			}
+			polylist.add(polytemp);
+
 		}
-		this.setBounds(polygon.getBounds()); // This is where the Magic happens,
-												// hier wird der bereich
-												// festgelegt, der Clickbar ist
 
 	}
 
 	public void setCapital(int[] coords) {
 		this.capital = coords;
+		this.setBounds(capital[0]-5,capital[1]-15, 15, 20);
 	}
 
 	public String getName() {
@@ -94,22 +97,16 @@ public class Territory extends JComponent {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(Color.BLUE);
-		if (owner == null)
+		for (Polygon polygon : polylist) {
 			g.setColor(Color.GRAY);
-		else if (owner.equals("CPU"))
-			g.setColor(Color.RED);
-		else if (owner.equals("HUMAN"))
-			g.setColor(Color.BLUE);
+			g.fillPolygon(polygon);
+			g.setColor(Color.BLACK);
+			g.drawPolygon(polygon);
+		}
 
-		g.fillPolygon(polygon);
-
-		g.setColor(Color.BLACK);
-		g.drawPolygon(polygon);
-		Rectangle test = polygon.getBounds();
 		g.setColor(Color.RED);
-		g.drawRect(test.x,test.y,test.width,test.height);
-
+		g.drawRect(capital[0]-5,capital[1]-15, 15, 20);
+		
 		g.drawString(Integer.toString(armyValue), capital[0], capital[1]);
 
 	}
