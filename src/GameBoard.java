@@ -21,13 +21,10 @@ public class GameBoard extends JPanel{
 	public int computerReinforcements;
 	public int roundNumber;
 
-	public Dice dice = new Dice();
-
 	public CPU cpu = new CPU("COMPUTER");
 
 
-	private Territory selectedTerritory;
-
+	private Territory selectedTerritory = null;
 	private ArrayList<Territory> movableTerritories = null;
 
 
@@ -231,10 +228,7 @@ public class GameBoard extends JPanel{
 			x1 = x2;
 			x2 = temp;
 		}
-		if (x2 - x1 > 625)
-			return true;
-		else
-			return false;
+		return x2 - x1 > 625;
 	}
 
 	class MouseAdapterMod extends MouseAdapter {
@@ -272,7 +266,6 @@ public class GameBoard extends JPanel{
 						startRound();
 					}
 					if(gamePhase==2) {
-						System.out.println("Movephase");
 						playersTurn = true;
 
 					}
@@ -412,7 +405,7 @@ public class GameBoard extends JPanel{
 
 						} else if(clickedTerritory.getNeighbours().contains(selectedTerritory) && !Objects.equals(clickedTerritory.getOwner(), "PLAYER") && selectedTerritory.getArmyCount() > 1) {
 
-							if(dice.pressTheAttack(selectedTerritory, clickedTerritory)) {
+							if(Dice.pressTheAttack(selectedTerritory, clickedTerritory)) {
 								cpu.removeTerritory(clickedTerritory);
 								selectedTerritory = null;
 							}
@@ -446,7 +439,7 @@ public class GameBoard extends JPanel{
 							selectedTerritory = clickedTerritory;
 							selectedTerritory.selectForTransfer();
 
-						} else if(selectedTerritory != null && clickedTerritory.equals(selectedTerritory)) {
+						} else if(clickedTerritory.equals(selectedTerritory)) {
 
 							selectedTerritory.deselectForTransfer();
 							selectedTerritory = null;
@@ -498,7 +491,6 @@ public class GameBoard extends JPanel{
 
 				System.out.println();
 				System.out.println("Round " + roundNumber + "!");
-				System.out.println("__ " + playerReinforcements + " <- PR; CR -> " + computerReinforcements); //debug
 				System.out.println("Reinforcements have arrived! You got " + playerReinforcements + " reinforcements. Use them wisely!");
 				playersTurn = true;
 			}

@@ -3,6 +3,13 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
+
+/**
+ *
+ * Territory
+ */
+
+
 public class Territory extends JComponent {
 	private String name;
 	private ArrayList<Territory> neighbours;

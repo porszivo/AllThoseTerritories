@@ -1,47 +1,48 @@
-import javafx.scene.control.ChoiceDialog;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 /**
- * Created by Marcel on 31.01.2016.
+ * Dice is the class for the attack/conquer logic
+ * includes the pressTheAttack function
  */
+
 public class Dice {
 
-    public Dice() {
-
+    /**
+     *
+     * @return throw value for each party
+     */
+    public static ArrayList<Integer> throwDice(int a) {
+        ArrayList<Integer> out = new ArrayList<>();
+        for(int i = 0; i < a; i++) {
+            out.add((int)(Math.random() * 6) + 1);
+        }
+        out.sort(Collections.reverseOrder());
+        return out;
     }
 
-    public static int throwDice() {
-        return (int)(Math.random() * 6) + 1;
-    }
-
-    public boolean pressTheAttack(Territory from, Territory to) {
+    /**
+     *
+     * @param from: Offender
+     * @param to: Defender
+     * @return boolean, won or lost the fight
+     *
+     * This function implements the conquer logic
+     */
+    public static boolean pressTheAttack(Territory from, Territory to) {
         if(from.getArmyCount()>=to.getArmyCount() && to.getArmyCount() <= 2) {
-
-            ArrayList<Integer> offenderThrows = new ArrayList<>();
-            ArrayList<Integer> defenderThrows = new ArrayList<>();
 
             int numberOfOffender = from.getArmyCount() - 1 >= 3 ? 3 : from.getArmyCount() - 1;
             int numberOfDefender = to.getArmyCount() >= 2 ? 2 : to.getArmyCount();
 
-            for (int i = 0; i < numberOfOffender; i++) {
-                offenderThrows.add(throwDice());
-            }
+            ArrayList<Integer> offenderThrows = throwDice(numberOfOffender);
+            ArrayList<Integer> defenderThrows = throwDice(numberOfDefender);
 
-            for (int i = 0; i < numberOfDefender; i++) {
-                defenderThrows.add(throwDice());
-            }
             System.out.println("Attack from " + from.getName() + "(" + offenderThrows.size() + ")" + "to " + to.getName() + "(" + defenderThrows.size() + ")");
-            offenderThrows.sort(Collections.reverseOrder());
-            defenderThrows.sort(Collections.reverseOrder());
 
             System.out.println(offenderThrows);
             System.out.println(defenderThrows);
-
 
             while(offenderThrows.size() > 0 && defenderThrows.size() > 0) {
                 if(offenderThrows.get(0) > defenderThrows.get(0)) {
@@ -55,7 +56,7 @@ public class Dice {
                 defenderThrows.remove(0);
             }
 
-
+            /** Won the fight? In that case show a dialog, if the amount of offender > from.army + 1, to increase the movement **/
             if(to.getArmyCount()==0) {
                 int moveArmyCount = numberOfOffender;
                 if(numberOfOffender < from.getArmyCount()-1) {
@@ -111,7 +112,7 @@ public class Dice {
             from.deselectForAttack();*/
 
         } else {
-            System.out.println("__Attack is not possible, Armycount to low");
+            System.out.println("__Attack is not possible, not enough troops");
             return false;
         }
     }
