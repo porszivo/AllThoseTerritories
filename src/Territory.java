@@ -6,7 +6,7 @@ import java.util.Objects;
 
 /**
  *
- * Territory
+ * Territory class
  */
 
 

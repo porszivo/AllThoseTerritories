@@ -4,7 +4,7 @@ import java.util.Collections;
 
 /**
  * Dice is the class for the attack/conquer logic
- * includes the pressTheAttack function
+ * includes the pressTheAttack function and the throwDice
  */
 
 public class Dice {

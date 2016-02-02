@@ -271,7 +271,7 @@ public class GameBoard extends JPanel{
 					}
 					changeGamePhase();
 
-				} else {  /** ONLY FOR DEBUGGING! **/
+				} else {  /** ONLY FOR DEBUGGING! - Should be removed in final **/
 					String[] player = new String[]{"PLAYER","COMPUTER"};
 					int c = 0;
 					for(Territory terr : terrList) {
