@@ -16,10 +16,14 @@ public class Dice {
     public static ArrayList<Integer> throwDice(int a) {
         ArrayList<Integer> out = new ArrayList<>();
         for(int i = 0; i < a; i++) {
-            out.add((int)(Math.random() * 6) + 1);
+            out.add(throwDie());
         }
         out.sort(Collections.reverseOrder());
         return out;
+    }
+    
+    public static int throwDie() {
+        return (int)(Math.random() * 6 ) + 1);
     }
 
     /**
