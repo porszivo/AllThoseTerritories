@@ -23,7 +23,7 @@ public class Dice {
     }
     
     public static int throwDie() {
-        return (int)(Math.random() * 6 ) + 1);
+        return (int)((Math.random() * 6 ) + 1);
     }
 
     /**

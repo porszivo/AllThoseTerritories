@@ -22,6 +22,14 @@ public class Continent {
 
 	}
 
+	public int getAmountOfTerritory() {
+		return list.size();
+	}
+
+	public ArrayList<Territory> getTerritoryList() {
+		return list;
+	}
+
 	public int getBonus() {
 		return bonus;
 	}
@@ -30,4 +38,5 @@ public class Continent {
 		list.add(ter);
 		ter.setMotherContinent(this);
 	}
+
 }
