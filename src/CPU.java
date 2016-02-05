@@ -21,13 +21,14 @@ public class CPU {
         terrList.remove(terr);
     }
 
-    public void reinforce(int computerReinforcements) {
-        Territory reinforceTerr;
+    public void reinforce(int computerReinforcements, ArrayList<Continent> contList) {
+    
+        Continent cont = getMostValuable(contList);
+        Territory reinforceTerr = AIHelper.mostEnemyNeighbor(cont, "COMPUTER");
+        
         while(computerReinforcements > 0) {
-            reinforceTerr = terrList.get((int)(Math.random() * terrList.size()));
-            reinforceTerr.changeArmycount(1);
+            reinforceTerr.changeArmyCount(1);
             reinforceTerr.repaint();
-
             computerReinforcements -= 1;
             if(computerReinforcements > 0) {
                 System.out.print(reinforceTerr.getName() + ", ");
@@ -45,26 +46,42 @@ public class CPU {
      * @todo: Attack AI
      * @param
      */
-    public void conquer() {
-
+    public void conquer(ArrayList<Continent> contList) {
+        Continent cont = getMostValuable(contList);
+        Territory offender = AIHelper.mostEnemyNeighbor(cont, "COMPUTER");        
     }
 
-    public void acquire(ArrayList<Territory> terrList) {
-
+    
+    public void acquire(ArrayList<Continent> contList) {
+        
+        Continent cont = getMostValuableContinent(contList);
+        
         Territory chosenTerritory;
         do {
-            chosenTerritory = terrList.get((int)(Math.random() * terrList.size())); // The computer selects a completely random territory (to be made more sophisticated! TODO!)
-        } while(chosenTerritory.getOwner() != null); // Until it has managed to selectForAttack an unoccupied territory
-
+            chosenTerritory = cont.getTerritoryList().get((int)(Math.random() * cont.getAmountOfTerritory()));
+        } while(chosenTerritory.getOwner() != null);
+        
         chosenTerritory.setArmyCount(1);
-        chosenTerritory.changeOwner("COMPUTER");
-        addTerritory(chosenTerritory);
-        System.out.println("The computer has occupied " + chosenTerritory.getName() + " with 1 army!");
-
+        chosenTerritory.changeOwner("COMPUTER")
+        addTerritory(chosenTerritory); 
+        System.out.println("The computer has occupied " + chosenTerritory.getName() + " with 1 army!"); 
+        
     }
 
     public void acquire(Territory terr) {
         addTerritory(terr);
+    }
+    
+    private Continent getMostValuableContinent(ArrayList<Continent> contList) {
+        double min = 20;
+        Continent cont = null;
+        for(Continent c : contList) {
+            if(AIHelper.calcContinentWeight(c,"COMPUTER") < min) {
+                cont = c;
+                min = AIHelper.calcContinentWeight(c,"COMPUTER");
+            }
+        }
+        return cont;
     }
 
     /**
