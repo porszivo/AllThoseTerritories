@@ -38,5 +38,9 @@ public class Continent {
 		list.add(ter);
 		ter.setMotherContinent(this);
 	}
+	
+	public double getContinentWeight(String player) {
+		return AIHelper.calcContinentWeight(this,player);
+	}
 
 }
