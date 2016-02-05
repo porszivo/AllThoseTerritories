@@ -93,5 +93,32 @@ public class AIHelper {
         }
         return ret;
     }
-
+    
+    /**
+     * Returns the Territory with the most enemy neighbors
+     * @param c: Continent
+     * @param player: player of the Player
+     * @return
+     */
+    public static Territory mostEnemyNeighbor(Continent c, String player) {
+        int max = 0;
+        Territory retTer = null;
+        for(Territory terr : c.getTerritoryList) {
+            if(terr.getOwner().equals(player)) {
+                int i = 0;
+                for(Territory terrNeigh : terr.getNeighbours()) {
+                    if(!terrNeigh.getOwner().equals(player)) {
+                        i++;
+                    }
+                }
+                if(max<i) {
+                    retTer = terr;
+                    max = i;
+                }
+            }
+        }
+        
+        return retTer;
+    }
+    
 }
