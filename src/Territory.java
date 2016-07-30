@@ -20,11 +20,13 @@ public class Territory extends JComponent {
 	private ArrayList<int[]> polyXCoords;
 	private ArrayList<int[]> polyYCoords;
 	private Continent motherContinent;
+	private ControlCentre controlCentre;
 	private boolean isSelectedForAttack;
 	private boolean isSelectedForTransfer;
 
-	public Territory(String name, int[] coords) {
+	public Territory(String name, int[] coords, ControlCentre controlCentre) {
 		super();
+		this.controlCentre = controlCentre;
 		this.name = name;
 		this.owner = null;
 		this.polyXCoords = new ArrayList<>();
@@ -72,7 +74,6 @@ public class Territory extends JComponent {
 
 	public void setCapital(int[] coords) {
 		this.capital = coords;
-		//this.setBounds(capital[0] - 7, capital[1] - 15, 20, 20);
         this.setBounds(capital[0] - 1000, capital[1] - 1000, 2000, 2000);
 	}
 
@@ -135,7 +136,6 @@ public class Territory extends JComponent {
 	}
 
 	public int getArmyCount() {
-		//return Integer.toString(armyCount);
 		return this.armyCount;
 	}
 
@@ -151,12 +151,8 @@ public class Territory extends JComponent {
 		super.paintComponent(gf);
 		Graphics2D g = (Graphics2D) gf;
 		for (Polygon polygon : polylist) {
-			//g.setColor(fillColour);
-            //g.setColor(Objects.equals(this.owner, "PLAYER") ? Color.green : Objects.equals(this.owner, "COMPUTER") ? Color.red : Color.gray);
 			Color c = Color.gray;
 			if(Objects.equals(this.owner, "PLAYER")) c = new Color(0, 170, 0);
-			if(Objects.equals(this.owner, "PLAYER") && this.isSelectedForTransfer) c = Color.BLUE;
-			//if(Objects.equals(this.owner, "PLAYER") && this.isSelectedForTransfer) c = new Color(0, 220, 0);
 			if(Objects.equals(this.owner, "PLAYER") && this.isSelectedForAttack) c = new Color(250, 200, 100);
 			if(Objects.equals(this.owner, "COMPUTER")) c = new Color(210, 0, 0);
 			if(Objects.equals(this.owner, "COMPUTER") && this.isSelectedForAttack) c = new Color(255, 140, 0);
@@ -169,23 +165,25 @@ public class Territory extends JComponent {
 
 		g.setColor(new Color(150, 224, 255));
 		g.setStroke(new BasicStroke(1));
-		//g.drawRect(capital[0] - 7, capital[1] - 15, 20, 20);
 		g.drawRoundRect(capital[0] - 7, capital[1] - 15, 20, 20, 5, 5);
 
+		Font font1 = new Font("Verdana", 0, 11);
+		g.setFont(font1);
 		g.drawString(Integer.toString(armyCount), capital[0], capital[1]);
+		Font font2 = new Font("Verdana", 0, 9);
+		g.setFont(font2);
+		g.drawString(name, capital[0] + 15, capital[1] + 0);
 
 	}
 
-	public void changeArmycount(int v) {
+	public void changeArmyCount(int v) {
 		armyCount = armyCount + v;
 		this.repaint();
 	}
 
 	public boolean containsClick(Point p) {
-        //super.contains(e.getPoint());
 		for (Polygon polygon : polylist) {
 			if(polygon.contains(p)) {
-                //System.out.println("__" + this.getName() + ": Yes");
                 return true;
 			}
 		}
@@ -193,10 +191,6 @@ public class Territory extends JComponent {
 	}
 
 	public void changeOwner(String ow) {
-		/*if (this.getOwner() == null) {
-			this.owner = ow;
-			this.repaint();
-		}*/
 		this.owner = ow;
 		this.repaint();
 	}

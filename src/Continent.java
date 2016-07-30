@@ -5,8 +5,10 @@ public class Continent {
 	private ArrayList<Territory> list;
 	private String name;
 	private int bonus;
+	private ControlCentre controlCentre;
 	
-	public Continent(String name,int bonus){
+	public Continent(String name, int bonus, ControlCentre controlCentre) {
+		this.controlCentre = controlCentre;
 		this.name = name;
 		this.bonus = bonus;
 		list = new ArrayList<Territory>();
@@ -41,6 +43,18 @@ public class Continent {
 	
 	public double getContinentWeight(String player) {
 		return AIHelper.calcContinentWeight(this,player);
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public boolean isOccupied() {
+		boolean ret = true;
+		for(Territory terr : list) {
+			if(terr.getOwner() == null) return false;
+		}
+		return ret;
 	}
 
 }

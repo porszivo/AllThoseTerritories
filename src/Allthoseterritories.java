@@ -2,23 +2,29 @@ import javax.swing.*;
 
 // Main Class
 
-public class Allthoseterritories extends JPanel {
+public class AllThoseTerritories extends JPanel {
+
+
 
 	public static void main(String[] args) {
 
-		JFrame frame = new JFrame("All Those Territories");
-        GameBoard gb = new GameBoard(args[0]);
-		Menu men = new Menu();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setContentPane(gb);
-		frame.setSize(1250, 650);
-		frame.setVisible(true);
+		JFrame mapFrame = new JFrame("Game Map - ATT");
+		ControlCentre controlCentre = new ControlCentre();
+		GameBoard gameBoard = new GameBoard(args[0], controlCentre);
+		controlCentre.assignGameBoard(gameBoard);
+		mapFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mapFrame.setContentPane(gameBoard);
+		mapFrame.setSize(1250, 650);
+		mapFrame.setLocation(80, 80);
+		mapFrame.setVisible(true);
 
-		JFrame menu = new JFrame("Menu");
-        menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		menu.setContentPane(men);
-		menu.setSize(200, 650);
-		frame.setVisible(true);
+		JFrame ccFrame = new JFrame("Control Centre - ATT");
+        ccFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ccFrame.setContentPane(controlCentre);
+		ccFrame.setSize(1250, 240);
+		ccFrame.setLocation(80, 730);
+		ccFrame.setAlwaysOnTop(true);
+		ccFrame.setVisible(true);
 
 
 		//frame.add(new InfoText());
