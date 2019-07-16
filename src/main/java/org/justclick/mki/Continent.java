@@ -1,60 +1,56 @@
+package org.justclick.mki;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Continent {
 
-	private ArrayList<Territory> list;
-	private String name;
-	private int bonus;
-	private ControlCentre controlCentre;
-	
-	public Continent(String name, int bonus, ControlCentre controlCentre) {
-		this.controlCentre = controlCentre;
-		this.name = name;
-		this.bonus = bonus;
-		list = new ArrayList<Territory>();
-	}
+    private List<Territory> list;
+    private String name;
+    private int bonus;
 
-	public boolean completeOwner(String player) {
+    public Continent(String name, int bonus) {
+        this.name = name;
+        this.bonus = bonus;
+        list = new ArrayList<>();
+    }
 
-		for(Territory elem : list) {
-			if(!elem.getOwner().equals(player)) return false;
-		}
+    public boolean completeOwner(String player) {
 
-		return true;
+        for (Territory elem : list) {
+            if (!elem.getOwner().equals(player)) return false;
+        }
 
-	}
+        return true;
 
-	public int getAmountOfTerritory() {
-		return list.size();
-	}
+    }
 
-	public ArrayList<Territory> getTerritoryList() {
-		return list;
-	}
+    public int getAmountOfTerritory() {
+        return list.size();
+    }
 
-	public int getBonus() {
-		return bonus;
-	}
+    public List<Territory> getTerritoryList() {
+        return list;
+    }
 
-	public void addTerritory(Territory ter){
-		list.add(ter);
-		ter.setMotherContinent(this);
-	}
-	
-	public double getContinentWeight(String player) {
-		return AIHelper.calcContinentWeight(this,player);
-	}
+    public int getBonus() {
+        return bonus;
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public void addTerritory(Territory ter) {
+        list.add(ter);
+        ter.setMotherContinent(this);
+    }
 
-	public boolean isOccupied() {
-		boolean ret = true;
-		for(Territory terr : list) {
-			if(terr.getOwner() == null) return false;
-		}
-		return ret;
-	}
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean isOccupied() {
+        for (Territory terr : list) {
+            if (terr.getOwner() == null) return false;
+        }
+        return true;
+    }
 
 }

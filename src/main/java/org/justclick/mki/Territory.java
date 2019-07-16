@@ -1,3 +1,5 @@
+package org.justclick.mki;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -6,7 +8,7 @@ import java.util.Objects;
 
 /**
  *
- * Territory class
+ * org.justclick.mki.Territory class
  */
 
 
@@ -20,13 +22,13 @@ public class Territory extends JComponent {
 	private ArrayList<int[]> polyXCoords;
 	private ArrayList<int[]> polyYCoords;
 	private Continent motherContinent;
-	private ControlCentre controlCentre;
+	private ControllCenter controllCenter;
 	private boolean isSelectedForAttack;
 	private boolean isSelectedForTransfer;
 
-	public Territory(String name, int[] coords, ControlCentre controlCentre) {
+	public Territory(String name, int[] coords, ControllCenter controllCenter) {
 		super();
-		this.controlCentre = controlCentre;
+		this.controllCenter = controllCenter;
 		this.name = name;
 		this.owner = null;
 		this.polyXCoords = new ArrayList<>();

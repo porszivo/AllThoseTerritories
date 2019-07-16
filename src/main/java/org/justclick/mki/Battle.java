@@ -1,4 +1,6 @@
-import java.util.ArrayList;
+package org.justclick.mki;
+
+import java.util.List;
 
 public class Battle {
 
@@ -19,13 +21,12 @@ public class Battle {
     }
 
     /**
-     * Very simple check to see how many enemies the "new" Territory would have
-     *
+     * Very simple check to see how many enemies the "new" org.justclick.mki.Territory would have
      */
     private int simVictory() {
         int i = 0;
-        for(Territory terr : this.getDefender().getNeighbours()) {
-            if(!terr.getOwner().equals("COMPUTER")) {
+        for (Territory terr : this.getDefender().getNeighbours()) {
+            if (!terr.getOwner().equals("COMPUTER")) {
                 i++;
             }
         }
@@ -33,16 +34,17 @@ public class Battle {
     }
 
     /**
-     * Very simple Ai to get the Territory with the most enemy neighbors
-     * Move to AIHelper
+     * Very simple Ai to get the org.justclick.mki.Territory with the most enemy neighbors
+     * Move to org.justclick.mki.AIHelper
      * Check if it is working!?
      *
+     * @param battles
      */
-    public static Battle chooseBestBattle(ArrayList<Battle> battles) {
+    public static Battle chooseBestBattle(List<Battle> battles) {
         int min = -1;
         Battle ret = null;
-        for(Battle bat : battles) {
-            if(bat.simVictory() > min) {
+        for (Battle bat : battles) {
+            if (bat.simVictory() > min) {
                 min = bat.simVictory();
                 ret = bat;
             }

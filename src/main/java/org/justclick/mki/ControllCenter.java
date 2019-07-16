@@ -1,12 +1,13 @@
+package org.justclick.mki;
+
 import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.*;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
-public class ControlCentre extends JPanel implements ActionListener {
+public class ControllCenter extends JPanel implements ActionListener {
 
     private JButton finishButton = new JButton("Finish Round");
     private JTextArea logText = new JTextArea();
@@ -25,7 +26,7 @@ public class ControlCentre extends JPanel implements ActionListener {
 
 
 
-    public ControlCentre() {
+    public ControllCenter() {
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setAutoCreateGaps(true);

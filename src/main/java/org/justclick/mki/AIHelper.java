@@ -1,3 +1,5 @@
+package org.justclick.mki;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -51,7 +53,7 @@ public class AIHelper {
 
     /**
      * Returns the ratio of own troops on one continent in relation to all territories on the same continent
-     * @param c: Continent
+     * @param c: org.justclick.mki.Continent
      * @param player: player of the Player
      * @return
      *
@@ -72,7 +74,7 @@ public class AIHelper {
 
     /**
      * Returns the ratio of own territories in one continent in relation to all territories on the same continent
-     * @param c: Continent
+     * @param c: org.justclick.mki.Continent
      * @param player: player of the Player
      * @return
      */
@@ -92,7 +94,7 @@ public class AIHelper {
 
     /**
      * Returns true if at least one country on given continent is under the control of player
-     * @param c: Continent
+     * @param c: org.justclick.mki.Continent
      * @param player: player of the Player
      * @return
      */
@@ -107,8 +109,8 @@ public class AIHelper {
     }
     
     /**
-     * Returns the Territory with the most enemy neighbors
-     * @param c: Continent
+     * Returns the org.justclick.mki.Territory with the most enemy neighbors
+     * @param c: org.justclick.mki.Continent
      * @param player: player of the Player
      * @return
      */
@@ -116,11 +118,11 @@ public class AIHelper {
         int max = -1;
         Territory retTer = null;
         System.out.println("Now calculating territory with most enemy neighbours:");
-        System.out.println("Continent " + c.getName());
+        System.out.println("org.justclick.mki.Continent " + c.getName());
         for(Territory terr : c.getTerritoryList()) {
             System.out.println("---------");
             System.out.println("For step!");
-            System.out.println("Territory " + terr.getName());
+            System.out.println("org.justclick.mki.Territory " + terr.getName());
             System.out.println("Is belong to " + player + "?");
             if(Objects.equals(terr.getOwner(), player)) {
                 System.out.println("yes!");
